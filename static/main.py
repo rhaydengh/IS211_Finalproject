@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Assignment 12"""
+"""Final Project, blog site"""
 
 from flask import Flask, render_template, request, redirect, session, url_for, g, abort, flash, escape
 from contextlib import closing
@@ -12,8 +12,6 @@ DEBUG = True
 SECRET_KEY = "key"
 USERNAME = "admin"
 PASSWORD = "password"
-
-
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -41,7 +39,6 @@ def teardown_request(exception):
     if db is not None:
         db.close()
 
-
 @app.route('/')
 def index():
     if 'username' in session:
@@ -65,14 +62,12 @@ def login():
 def logout():
     return render_template('index.html')
 
-
 @app.route('/blogpage', methods = ['GET'])
 def blogpage():
     curs = g.db.execute('select blognum, title, date, author, content from blogs ORDER BY blognum DESC')
     blogs = [dict(blognum = row[0], title = row[1], date = row[2], author = row[3], content = row[4])
                     for row in curs.fetchall()]
     return render_template("blogsite.html", blogs=blogs)
-
 
 @app.route('/blog/add', methods = ['POST', 'GET'])
 def addblog():
@@ -103,8 +98,8 @@ def deletepost():
         return redirect(url_for('blogpage'))
     return render_template('deletepost.html')
 
-
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
 
 if __name__ == "__main__":
     app.run()
