@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Blog Site</title>
+  </head>
+
+
+</form>
+    <body>
+
+      <h1>My Blog Site</h1>
+        <h2>The place where you can blog about anything</h2>
+
+    <TABLE BORDER="5"    WIDTH="50%"   CELLPADDING="4" CELLSPACING="3">
+
+
+       <TR>
+          <TH>Blog#</TH>
+          <TH>Title</TH>
+          <TH>Post Date</TH>
+          <TH>Author</TH>
+          <TH>Entry</TH>
+          <TH>Options</TH>
+       </TR>
+
+       {% for blog in blogs %}
+       <TR ALIGN="CENTER">
+           <TD>{{ blog.blognum }}</TD>
+           <TD>{{ blog.title }}</TD>
+           <TD>{{ blog.date }}</TD>
+           <TD>{{ blog.author }}</TD>
+           <TD>{{ blog.content }}</TD>
+           <TD><a href="{{ url_for('editpost') }}"><input type="button" name="button" value="Edit"></a>
+           <a href="{{ url_for('deletepost') }}"><input type="button" name="button" value="Delete"></a></TD>
+       {% endfor %}
+       </TR>
+    </TABLE>
+    <br>
+    <br>
+
+
+    <div>
+    <div>
+    <h2>New Blog</h2>
+    <form action ="/blog/add" method="POST">
+    Title:
+    <input type="text" name="title"></input><br>
+    Date:
+    <input type="text" name="date"></input><br>
+    Author:
+    <input type="text" name="author"></input><br>
+    Entry:
+    <input type="text" name="content"></input><br>
+    <input type="submit" value="Add Blog">
+    </form>
+
+<br>
+<form action="/logout" method="post">
+<input type="submit" value="Log Out">
+
+ 
+
+  </body>
+</html>
